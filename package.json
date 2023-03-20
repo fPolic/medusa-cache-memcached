@@ -30,6 +30,7 @@
     "@medusajs/medusa": "^1.7.13"
   },
   "dependencies": {
+    "@medusajs/modules-sdk": "^0.0.1",
     "memcached": "^2.2.2"
   }
 }
