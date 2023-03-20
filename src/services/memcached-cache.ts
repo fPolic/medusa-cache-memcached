@@ -6,21 +6,17 @@ import { MemcachedCacheModuleOptions } from "../types"
 
 const DEFAULT_CACHE_TIME = 30 // 30 seconds
 
-type InjectedDependencies = {
-  cacheMemcachedConnection: Memcached
-}
+type InjectedDependencies = {}
 
 class MemcachedCacheService implements ICacheService {
   protected readonly TTL: number
   protected readonly memcached: Memcached
 
   constructor(
-    { cacheMemcachedConnection }: InjectedDependencies,
+    { }: InjectedDependencies,
     options: MemcachedCacheModuleOptions
   ) {
-    // this.memcached = new Memcached(options.location, options.options)
-
-    this.memcached = cacheMemcachedConnection
+    this.memcached = new Memcached(options.location, options.options)
     this.TTL = options.ttl || DEFAULT_CACHE_TIME
   }
   /**
