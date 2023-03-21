@@ -64,7 +64,7 @@ class MemcachedCacheService implements ICacheService {
   }
 
   /**
-   * Invalidate cache for a specific key. a key can be either a specific key or more global such as "ps:*".
+   * Invalidate cache for a specific key. a key can be either a specific key.
    * @param key
    */
   async invalidate(key: string): Promise<void> {
