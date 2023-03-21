@@ -13,7 +13,7 @@ class MemcachedCacheService implements ICacheService {
   protected readonly memcached: Memcached
 
   constructor(
-    { }: InjectedDependencies,
+    {}: InjectedDependencies,
     options: MemcachedCacheModuleOptions
   ) {
     this.memcached = new Memcached(options.location, options.options)

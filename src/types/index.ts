@@ -12,6 +12,4 @@ export type MemcachedCacheModuleOptions = {
   location: Memcached.Location
 
   options?: Memcached.options
-
-  /* TOOD... namespace */
 }
