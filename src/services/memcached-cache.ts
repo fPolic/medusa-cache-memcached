@@ -1,22 +1,30 @@
 import Memcached from "memcached"
 
-import { ICacheService } from "@medusajs/medusa"
+import { ICacheService, Logger } from "@medusajs/medusa"
 
 import { MemcachedCacheModuleOptions } from "../types"
 
 const DEFAULT_CACHE_TIME = 30 // 30 seconds
 
-type InjectedDependencies = {}
+type InjectedDependencies = { logger: Logger }
 
 class MemcachedCacheService implements ICacheService {
   protected readonly TTL: number
   protected readonly memcached: Memcached
 
   constructor(
-    {}: InjectedDependencies,
+    { logger }: InjectedDependencies,
     options: MemcachedCacheModuleOptions
   ) {
-    this.memcached = new Memcached(options.location, options.options)
+    
+    try {
+      this.memcached = new Memcached(options.location, options.options)
+    } catch (err) {
+      logger?.error(
+        `An error occurred while connecting to Memcached instance in module 'cache-memcached': ${err}`
+        )
+      }
+      
     this.TTL = options.ttl || DEFAULT_CACHE_TIME
   }
   /**
