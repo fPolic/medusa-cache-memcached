@@ -72,14 +72,16 @@ class MemcachedCacheService implements ICacheService {
   }
 
   /**
-   * Invalidate cache for a specific key. a key can be either a specific key.
+   * Invalidate cache for a specific key.
    * @param key
    */
   async invalidate(key: string): Promise<void> {
     return new Promise((res, rej) => {
-      this.memcached.touch(key, 0, (err) => {
+      this.memcached.del(key, (err) => {
         if (err) {
           rej(err)
+        } else {
+          res()
         }
       })
     })
